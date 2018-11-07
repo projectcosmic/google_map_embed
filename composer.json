@@ -11,6 +11,6 @@
     }
   ],
   "requires": {
-    "drupal/drupal": "~7.0"
+    "drupal/core": "~8.0"
   }
 }

@@ -1,0 +1,12 @@
+# Schema for configuration files of the Google Map Embed module.
+
+field.formatter.settings.google_map_embed_address:
+  type: mapping
+  label: 'Google Map Embed Address formatter settings'
+  mapping:
+    width:
+      type: string
+      label: 'CSS Width'
+    height:
+      type: string
+      label: 'CSS Height'

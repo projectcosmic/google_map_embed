@@ -6,117 +6,33 @@
  */
 
 /**
- * Implements hook_field_formatter_info().
+ * Implements hook_theme().
  */
-function google_map_embed_field_formatter_info() {
-  $formats = array(
-    'google_map_embed_embed' => array(
-      'label' => t('Map (Embed API)'),
-      'description' => t('Google Map using the Embed API.'),
-      'field types' => array('google_map_field', 'addressfield'),
-      'settings' => array(
-        'classes' => '',
-      ),
-    ),
-  );
-  return $formats;
+function google_map_embed_theme() {
+  return [
+    'google_map_embed' => [
+      'variables' => [
+        'attributes' => [],
+        'place' => '',
+      ],
+    ],
+  ];
 }
 
 /**
- * Implements hook_field_formatter_settings_form().
- */
-function google_map_embed_field_formatter_settings_form($field, $instance, $view_mode) {
-  $settings = $instance['display'][$view_mode]['settings'];
-
-  $elements['classes'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Classes'),
-    '#description' => t('Classes to apply to the embed <code>&lt;iframe></code> element.'),
-    '#default_value' => $settings['classes'],
-  );
-
-  return $elements;
-}
-
-/**
- * Implements hook_field_formatter_settings_summary().
- */
-function google_map_embed_field_formatter_settings_summary($field, $instance, $view_mode) {
-  $settings = $instance['display'][$view_mode]['settings'];
-
-  if ($settings['classes']) {
-    return t('Classes: @classes', array('@chars' => $settings['classes']));
-  }
-}
-
-/**
- * Implements hook_field_formatter_view().
- */
-function google_map_embed_field_formatter_view($object_type, $object, $field, $instance, $langcode, $items, $display) {
-  $element = array();
-  foreach ($items as $delta => $item) {
-    $element[$delta] = array(
-      '#theme' => 'html_tag',
-      '#tag' => 'iframe',
-      '#attributes' => array(
-        'class' => explode(' ', $display['settings']['classes']),
-        'frameborder' => '0',
-        'style' => 'border:0',
-        'allowfullscreen' => TRUE,
-        'src' => _google_map_embed_build_url_from_field($item, $field['type']),
-      ),
-      '#value' => '',
-    );
-  }
-  return $element;
-}
-
-/**
- * Builds a Google Embed API iframe src URL for a field value.
+ * Prepares variables for Google Map embed templates.
  *
- * @param array $item
- *   A field value.
- * @param string $field_type
- *   The field type that $item was from.
+ * Default template: google-map-embed.html.twig.
  *
- * @return string
- *   The Google Embed API iframe src URL.
+ * @param array $variables
+ *   An associative array containing:
+ *   - attributes: The HTML attributes to apply to the iframe element.
+ *   - place: place query string.
  */
-function _google_map_embed_build_url_from_field(array $item, $field_type) {
-  static $api_key;
-  if (!isset($api_key)) {
-    $api_key = variable_get('google_map_embed_api_key', '');
-  }
+function template_preprocess_google_map_embed(&$variables) {
+  $api_key = \Drupal::service('settings')->get('google_map_embed_api_key');
 
-  $parameters = '';
-  switch ($field_type) {
-    case 'google_map_field':
-      $parameters = "$item[lat],$item[lon]&zoom=$item[zoom]";
-      break;
-
-    case 'addressfield':
-      $components = array();
-      $component_order = array(
-        'name_line',
-        'first_name',
-        'last_name',
-        'organisation_name',
-        'premise',
-        'sub_premise',
-        'thoroughfare',
-        'administrative_area',
-        'sub_administrative_area',
-        'locality',
-        'dependent_locality',
-        'postal_code',
-      );
-      foreach ($component_order as $key) {
-        if ($item[$key]) {
-          $components[] = urlencode($item[$key]);
-        }
-      }
-      $parameters = implode(',', $components);
-  }
-
-  return "https://www.google.com/maps/embed/v1/place?q=$parameters&key=$api_key";
+  $variables['attributes']['frameborder'] = 0;
+  $variables['attributes']['style'] = 'border:0';
+  $variables['attributes']['src'] = "https://www.google.com/maps/embed/v1/place?q=$variables[place]&key=$api_key";
 }
