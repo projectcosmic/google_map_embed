@@ -87,7 +87,22 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
       $values = $this->getValues($item, $address_format);
 
       $address_components = [];
-      foreach ($address_format->getUsedFields() as $field) {
+      $component_order = array_intersect([
+        'givenName',
+        'additionalName',
+        'familyName',
+        'organization',
+        'addressLine1',
+        'addressLine2',
+        'dependentLocality',
+        'locality',
+        'administrativeArea',
+        'country',
+        'sortingCode',
+        'postalCode',
+      ], $address_format->getUsedFields());
+      
+      foreach ($component_order as $field) {
         if ($values[$field]) {
           $address_components[] = urlencode($values[$field]);
         }
