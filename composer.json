@@ -9,5 +9,8 @@
       "role": "Developer",
       "homepage": "https://cosmic.org.uk"
     }
-  ]
+  ],
+  "requires": {
+    "drupal/drupal": "~7.0"
+  }
 }
