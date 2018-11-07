@@ -1,0 +1,13 @@
+{
+  "name": "projectcosmic/google_map_embed",
+  "description": "Display Google Maps using the Embed API to remove billable usage.",
+  "type": "drupal-module",
+  "authors": [
+    {
+      "name": "Justin Wong",
+      "email": "justin@cosmic.org.uk",
+      "role": "Developer",
+      "homepage": "https://cosmic.org.uk"
+    }
+  ]
+}

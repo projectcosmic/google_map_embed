@@ -1,0 +1,4 @@
+name = Google Map Embed
+description = Display Google Maps using the Embed API to remove billable usage.
+package = Custom
+core = 7.x
