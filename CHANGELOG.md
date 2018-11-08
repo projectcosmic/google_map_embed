@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]
 ------------
 
+[1.1.0] - 2018-11-08
+--------------------
+### Added
+- Add width and height field formatter settings
+
+### Changed
+- Abstract iframe output to a themeable
+
 [1.0.0] - 2018-11-07
 --------------------
 ### Added
