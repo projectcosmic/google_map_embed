@@ -79,11 +79,7 @@ function google_map_embed_field_formatter_settings_summary($field, $instance, $v
  */
 function google_map_embed_field_formatter_view($object_type, $object, $field, $instance, $langcode, $items, $display) {
   $settings = $display['settings'];
-  $attributes = array(
-    'frameborder' => '0',
-    'style' => 'border:0',
-    'allowfullscreen' => TRUE,
-  );
+  $attributes = array();
 
   if ($settings['classes']) {
     $attributes['class'] = explode(' ', $settings['classes']);
@@ -98,19 +94,16 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
   $element = array();
   foreach ($items as $delta => $item) {
     $element[$delta] = array(
-      '#theme' => 'html_tag',
-      '#tag' => 'iframe',
-      '#attributes' => array(
-        'src' => _google_map_embed_build_url_from_field($item, $field['type']),
-      ) + $attributes,
-      '#value' => '',
+      '#theme' => 'google_map_embed',
+      '#place' => _google_map_embed_get_field_place($item, $field['type']),
+      '#attributes_array' => $attributes,
     );
   }
   return $element;
 }
 
 /**
- * Builds a Google Embed API iframe src URL for a field value.
+ * Builds query string for Google Map Embed API place query.
  *
  * @param array $item
  *   A field value.
@@ -118,19 +111,12 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
  *   The field type that $item was from.
  *
  * @return string
- *   The Google Embed API iframe src URL.
+ *   The place query.
  */
-function _google_map_embed_build_url_from_field(array $item, $field_type) {
-  static $api_key;
-  if (!isset($api_key)) {
-    $api_key = variable_get('google_map_embed_api_key', '');
-  }
-
-  $parameters = '';
+function _google_map_embed_get_field_place(array $item, $field_type) {
   switch ($field_type) {
     case 'google_map_field':
-      $parameters = "$item[lat],$item[lon]&zoom=$item[zoom]";
-      break;
+      return "$item[lat],$item[lon]&zoom=$item[zoom]";
 
     case 'addressfield':
       $components = array();
@@ -153,8 +139,8 @@ function _google_map_embed_build_url_from_field(array $item, $field_type) {
           $components[] = urlencode($item[$key]);
         }
       }
-      $parameters = implode(',', $components);
+      return implode(',', $components);
   }
 
-  return "https://www.google.com/maps/embed/v1/place?q=$parameters&key=$api_key";
+  return '';
 }

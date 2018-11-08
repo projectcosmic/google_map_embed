@@ -5,4 +5,50 @@
  * Display Google Maps using the Embed API to remove billable usage.
  */
 
-require_once 'google_map_embed.field.inc';
+require 'google_map_embed.field.inc';
+
+/**
+ * Implements hook_theme().
+ */
+function google_map_embed_theme() {
+  return array(
+    'google_map_embed' => array(
+      'variables' => array(
+        'attributes_array' => array(),
+        'place' => '',
+      ),
+    ),
+  );
+}
+
+/**
+ * Processes variables for theme_google_map_embed() and google-map-embed.tpl.php.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - attributes: The HTML attributes to apply to the iframe element.
+ *   - place: place query string.
+ */
+function template_preprocess_google_map_embed(array &$variables) {
+  $api_key = variable_get('google_map_embed_api_key', '');
+
+  $variables['attributes_array']['allowfullscreen'] = TRUE;
+  $variables['attributes_array']['frameborder'] = 0;
+  $variables['attributes_array']['style'] = 'border:0';
+  $variables['attributes_array']['src'] = "https://www.google.com/maps/embed/v1/place?q=$variables[place]&key=$api_key";
+}
+
+/**
+ * Returns HTML for a Google Map embed.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - attributes: A string containing the attributes for the iframe.
+ *
+ * @see template_preprocess_google_map_embed()
+ *
+ * @ingroup themeable
+ */
+function theme_google_map_embed(array $variables) {
+  return '<iframe' . drupal_attributes($variables['attributes_array']) . '></iframe>';
+}
