@@ -13,7 +13,11 @@ function google_map_embed_field_formatter_info() {
     'google_map_embed_embed' => array(
       'label' => t('Map (Embed API)'),
       'description' => t('Google Map using the Embed API.'),
-      'field types' => array('google_map_field', 'addressfield'),
+      'field types' => array(
+        'addressfield',
+        'google_map_field',
+        'location',
+      ),
       'settings' => array(
         'classes' => '',
         'width'   => '',
@@ -133,6 +137,24 @@ function _google_map_embed_get_field_place(array $item, $field_type) {
         'locality',
         'dependent_locality',
         'postal_code',
+      );
+      foreach ($component_order as $key) {
+        if ($item[$key]) {
+          $components[] = urlencode($item[$key]);
+        }
+      }
+      return implode(',', $components);
+
+    case 'location':
+      $components = array();
+      $component_order = array(
+        'name',
+        'street',
+        'additional',
+        'city',
+        'province_name',
+        'postal_code',
+        'country_name',
       );
       foreach ($component_order as $key) {
         if ($item[$key]) {

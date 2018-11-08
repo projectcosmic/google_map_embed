@@ -9,6 +9,7 @@ This API has unlimited free usage limit but has fewer capabilities than the
 
 - [`addressfield`](https://drupal.org/project/google_map_field)
 - [`google_map_field`](https://drupal.org/project/google_map_field)
+- [`location` (CCK field from 'Location CCK' submodule)](https://drupal.org/project/location)
 
 ## Initial Setup
 
