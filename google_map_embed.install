@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the google_map_embed module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function google_map_embed_uninstall() {
+  variable_del('google_map_embed_block_map_settings');
+}

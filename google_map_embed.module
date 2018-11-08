@@ -5,6 +5,7 @@
  * Display Google Maps using the Embed API to remove billable usage.
  */
 
+require 'google_map_embed.block.inc';
 require 'google_map_embed.field.inc';
 
 /**
