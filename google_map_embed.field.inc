@@ -97,11 +97,14 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
 
   $element = array();
   foreach ($items as $delta => $item) {
-    $element[$delta] = array(
-      '#theme' => 'google_map_embed',
-      '#place' => _google_map_embed_get_field_place($item, $field['type']),
-      '#attributes_array' => $attributes,
-    );
+    $place = _google_map_embed_get_field_place($item, $field['type']);
+    if ($place) {
+      $element[$delta] = array(
+        '#theme' => 'google_map_embed',
+        '#place' => $place,
+        '#attributes_array' => $attributes,
+      );
+    }
   }
   return $element;
 }
