@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]
 ------------
 
+[1.1.3] - 2018-11-09
+--------------------
+### Fixed
+- Check field for empty state
+
 [1.1.2] - 2018-11-08
 --------------------
 ### Added
