@@ -53,3 +53,13 @@ function template_preprocess_google_map_embed(array &$variables) {
 function theme_google_map_embed(array $variables) {
   return '<iframe' . drupal_attributes($variables['attributes_array']) . '></iframe>';
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function google_map_embed_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'google_map_embed') . '/views',
+  );
+}

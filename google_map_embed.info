@@ -3,3 +3,4 @@ description = Display Google Maps using the Embed API to remove billable usage.
 package = Custom
 core = 7.x
 version = 7.x-2.2
+files[] = views/google_map_embed_location_address_handler.inc
