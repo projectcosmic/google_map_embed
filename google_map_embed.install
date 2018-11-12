@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the google_map_embed module.
+ */
+
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+
+/**
+ * Add 'classes' setting to address google map embed formatters.
+ */
+function google_map_embed_update_8101() {
+  $displays = EntityViewDisplay::loadMultiple();
+  foreach ($displays as $display) {
+    /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $display */
+    $fields_settings = $display->get('content');
+    $changed = FALSE;
+    foreach ($fields_settings as $field_name => $settings) {
+      if (!empty($settings['type'])) {
+        switch ($settings['type']) {
+          case 'google_map_embed_address':
+            $fields_settings[$field_name]['settings']['classes'] = '';
+            $changed = TRUE;
+            break;
+        }
+      }
+    }
+
+    if ($changed === TRUE) {
+      $display->set('content', $fields_settings)->save();
+    }
+  }
+}

@@ -4,6 +4,9 @@ field.formatter.settings.google_map_embed_address:
   type: mapping
   label: 'Google Map Embed Address formatter settings'
   mapping:
+    classes:
+      type: string
+      label: 'Classes on the iframe element'
     width:
       type: string
       label: 'CSS Width'

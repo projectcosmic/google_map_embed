@@ -30,6 +30,7 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
    */
   public static function defaultSettings() {
     return [
+      'classes' => '',
       'width' => '',
       'height' => '',
     ] + parent::defaultSettings();
@@ -40,6 +41,13 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $elements = parent::settingsForm($form, $form_state);
+
+    $elements['classes'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Classes'),
+      '#description' => $this->t('Classes to apply to the embed <code>&lt;iframe></code> element.'),
+      '#default_value' => $this->getSetting('classes'),
+    ];
 
     $elements['width'] = [
       '#title' => $this->t('Width'),
@@ -62,6 +70,10 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
   public function settingsSummary() {
     $settings = $this->getSettings();
     $summary = parent::settingsSummary();
+
+    if ($settings['classes']) {
+      $summary[] = $this->t('Classes: @classes', ['@classes' => $settings['classes']]);
+    }
 
     if ($settings['width']) {
       $summary[] = $this->t('Width: @width', ['@width' => $settings['width']]);
@@ -113,6 +125,9 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
         '#place' => implode(',', $address_components),
       ];
 
+      if ($settings['classes']) {
+        $map['#attributes']['class'] = implode(' ', $settings['classes']);
+      }
       if ($settings['width']) {
         $map['#attributes']['width'] = $settings['width'];
       }
