@@ -52,12 +52,14 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
     $elements['width'] = [
       '#title' => $this->t('Width'),
       '#type' => 'textfield',
+      '#description' => $this->t('<code>&lt;iframe></code> <code>width</code> attribute value.'),
       '#default_value' => $this->getSetting('width'),
     ];
 
     $elements['height'] = [
       '#title' => $this->t('Height'),
       '#type' => 'textfield',
+      '#description' => $this->t('<code>&lt;iframe></code> <code>height</code> attribute value.'),
       '#default_value' => $this->getSetting('height'),
     ];
 
@@ -113,7 +115,7 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
         'sortingCode',
         'postalCode',
       ], $address_format->getUsedFields());
-      
+
       foreach ($component_order as $field) {
         if ($values[$field]) {
           $address_components[] = urlencode($values[$field]);
