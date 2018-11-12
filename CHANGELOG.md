@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 [Unreleased]
 ------------
 
+[1.1.5] - 2018-11-12
+--------------------
+### Fixed
+- Fix field settings not editable via UI
+
 [1.1.4] - 2018-11-09
 --------------------
 ### Added
