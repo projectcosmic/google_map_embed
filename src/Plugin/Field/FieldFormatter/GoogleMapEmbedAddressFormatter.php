@@ -2,15 +2,9 @@
 
 namespace Drupal\google_map_embed\Plugin\Field\FieldFormatter;
 
-use CommerceGuys\Addressing\AddressFormat\AddressFormatRepositoryInterface;
-use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\geolocation\GoogleMapsDisplayTrait;
-use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\geolocation\GeolocationItemTokenTrait;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\address\Plugin\Field\FieldFormatter\AddressDefaultFormatter;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Plugin implementation of the 'google_map_embed_address' formatter.
