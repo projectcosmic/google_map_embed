@@ -75,7 +75,11 @@ function google_map_embed_field_formatter_settings_summary($field, $instance, $v
     $summary[] = t('Height: @height', array('@height' => $settings['height']));
   }
 
-  return implode('<br/>', $summary);
+  if ($summary) {
+    return implode('<br/>', $summary);
+  }
+
+  return t('No settings set');
 }
 
 /**
