@@ -122,7 +122,7 @@ class GoogleMapEmbedAddressFormatter extends AddressDefaultFormatter {
       ];
 
       if ($settings['classes']) {
-        $map['#attributes']['class'] = implode(' ', $settings['classes']);
+        $map['#attributes']['class'] = explode(' ', $settings['classes']);
       }
       if ($settings['width']) {
         $map['#attributes']['width'] = $settings['width'];
