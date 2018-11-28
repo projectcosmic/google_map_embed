@@ -22,6 +22,7 @@ function google_map_embed_field_formatter_info() {
         'classes' => '',
         'width'   => '',
         'height'  => '',
+        'use_coordinates' => FALSE,
       ),
     ),
   );
@@ -55,6 +56,15 @@ function google_map_embed_field_formatter_settings_form($field, $instance, $view
     '#default_value' => $settings['height'],
   );
 
+  if ($field['type'] == 'location') {
+    $elements['use_coordinates'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Use coordinates'),
+      '#description' => t('Embed will search using coordinates instead of address text fields.'),
+      '#default_value' => $settings['use_coordinates'],
+    );
+  }
+
   return $elements;
 }
 
@@ -73,6 +83,9 @@ function google_map_embed_field_formatter_settings_summary($field, $instance, $v
   }
   if ($settings['height']) {
     $summary[] = t('Height: @height', array('@height' => $settings['height']));
+  }
+  if ($field['type'] == 'location') {
+    $summary[] = t('Use coordinates: @value', array('@value' => $settings['use_coordinates'] ? t('Yes') : t('No')));
   }
 
   if ($summary) {
@@ -99,9 +112,13 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
     $attributes['height'] = $settings['height'];
   }
 
+  $options = array(
+    'use_coordinates' => $settings['use_coordinates'],
+  );
+
   $element = array();
   foreach ($items as $delta => $item) {
-    $place = _google_map_embed_get_field_place($item, $field['type']);
+    $place = _google_map_embed_get_field_place($item, $field['type'], $options);
     if ($place) {
       $element[$delta] = array(
         '#theme' => 'google_map_embed',
@@ -120,11 +137,18 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
  *   A field value.
  * @param string $field_type
  *   The field type that $item was from.
+ * @param array $options
+ *   An associative array of options containing:
+ *   - use_coordinates: Whether to use coordinates instead of address text field
+ *     components in the place query. Only applies to location field types.
+ *     Default FALSE.
  *
  * @return string
  *   The place query.
  */
-function _google_map_embed_get_field_place(array $item, $field_type) {
+function _google_map_embed_get_field_place(array $item, $field_type, array $options = array()) {
+  $options += array('use_coordinates' => FALSE);
+
   switch ($field_type) {
     case 'google_map_field':
       return "$item[lat],$item[lon]&zoom=$item[zoom]";
@@ -153,6 +177,10 @@ function _google_map_embed_get_field_place(array $item, $field_type) {
       return implode(',', $components);
 
     case 'location':
+      if ($options['use_coordinates']) {
+        return "$item[latitude],$item[longitude]";
+      }
+
       $components = array();
       $component_order = array(
         'name',
