@@ -22,6 +22,7 @@ function google_map_embed_field_formatter_info() {
         'classes' => '',
         'width'   => '',
         'height'  => '',
+        'zoom'    => 18,
         'use_coordinates' => FALSE,
       ),
     ),
@@ -56,6 +57,18 @@ function google_map_embed_field_formatter_settings_form($field, $instance, $view
     '#default_value' => $settings['height'],
   );
 
+  if ($field['type'] != 'google_map_field') {
+    $elements['zoom'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Zoom Level'),
+      '#description' => t('The initial zoom level of the map, between 0 (the whole world) and 21 (individual buildings).'),
+      '#default_value' => $settings['zoom'],
+      '#required' => TRUE,
+      '#size' => 2,
+      '#element_validate' => array('_google_map_field_validate_zoom_level'),
+    );
+  }
+
   if ($field['type'] == 'location') {
     $elements['use_coordinates'] = array(
       '#type' => 'checkbox',
@@ -66,6 +79,35 @@ function google_map_embed_field_formatter_settings_form($field, $instance, $view
   }
 
   return $elements;
+}
+
+/**
+ * Validates a form element as a Google Map Embed zoom parameter.
+ *
+ * @param array $element
+ *   The element to validate.
+ * @param array $form_state
+ *   The current form state.
+ */
+function _google_map_field_validate_zoom_level(array &$element, array &$form_state) {
+  $value = $element['#value'];
+  $name = $element['#title'];
+
+  if (empty($value)) {
+    return;
+  }
+
+  if (!is_numeric($value)) {
+    return form_set_error($element, t('%name must be a number.', array('%name' => $name)));
+  }
+
+  if (!intval($value)) {
+    return form_set_error($element, t('%name must be an integer.', array('%name' => $name)));
+  }
+
+  if ($value < 0 || $value > 21) {
+    return form_set_error($element, t('%name must be between 0 and 21.', array('%name' => $name)));
+  }
 }
 
 /**
@@ -83,6 +125,9 @@ function google_map_embed_field_formatter_settings_summary($field, $instance, $v
   }
   if ($settings['height']) {
     $summary[] = t('Height: @height', array('@height' => $settings['height']));
+  }
+  if ($field['type'] != 'google_map_field') {
+    $summary[] = t('Zoom: @zoom', array('@zoom' => $settings['zoom']));
   }
   if ($field['type'] == 'location') {
     $summary[] = t('Use coordinates: @value', array('@value' => $settings['use_coordinates'] ? t('Yes') : t('No')));
@@ -124,6 +169,7 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
         '#theme' => 'google_map_embed',
         '#place' => $place,
         '#attributes_array' => $attributes,
+        '#zoom' => $field['type'] == 'google_map_field' ? $item['zoom'] : $settings['zoom'],
       );
     }
   }
@@ -151,7 +197,7 @@ function _google_map_embed_get_field_place(array $item, $field_type, array $opti
 
   switch ($field_type) {
     case 'google_map_field':
-      return "$item[lat],$item[lon]&zoom=$item[zoom]";
+      return "$item[lat],$item[lon]";
 
     case 'addressfield':
       $components = array();

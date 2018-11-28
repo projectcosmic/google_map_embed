@@ -17,6 +17,7 @@ function google_map_embed_theme() {
       'variables' => array(
         'attributes_array' => array(),
         'place' => '',
+        'zoom'  => 18,
       ),
     ),
   );
@@ -36,7 +37,7 @@ function template_preprocess_google_map_embed(array &$variables) {
   $variables['attributes_array']['allowfullscreen'] = TRUE;
   $variables['attributes_array']['frameborder'] = 0;
   $variables['attributes_array']['style'] = 'border:0';
-  $variables['attributes_array']['src'] = "https://www.google.com/maps/embed/v1/place?q=$variables[place]&key=$api_key";
+  $variables['attributes_array']['src'] = "https://www.google.com/maps/embed/v1/place?q=$variables[place]&key=$api_key&zoom=$variables[zoom]";
 }
 
 /**
