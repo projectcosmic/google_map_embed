@@ -158,7 +158,7 @@ function google_map_embed_field_formatter_view($object_type, $object, $field, $i
   }
 
   $options = array(
-    'use_coordinates' => $settings['use_coordinates'],
+    'use_coordinates' => isset($settings['use_coordinates']) ? $settings['use_coordinates'] : FALSE,
   );
 
   $element = array();
