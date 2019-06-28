@@ -1,20 +1,19 @@
-Changelog
-=========
+# Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-[Unreleased]
-------------
+## [Unreleased]
+### Fixed
+- Fix changelog format
 
-[2.0.3] - 2018-11-12
---------------------
+## [2.0.3] - 2018-11-12
 ### Fixed
 - Fix class setting application
 
-[2.0.2] - 2018-11-12
---------------------
+## [2.0.2] - 2018-11-12
 ### Added
 - Add class setting to formatter
 - Add descriptors to formatter settings
@@ -22,12 +21,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fixed Drupal coding standards violations
 
-[2.0.1] - 2018-11-07
---------------------
+## [2.0.1] - 2018-11-07
 ### Changed
 - Set address component value order
 
-[2.0.0] - 2018-11-07
---------------------
+## [2.0.0] - 2018-11-07
 ### Added
 - Initial Drupal 8 release
+
+[Unreleased]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/HEAD..2.0.3
+[2.0.3]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.3..2.0.2
+[2.0.2]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.2..2.0.1
+[2.0.1]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.1..2.0.1
+[2.0.1]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.1..2.0.0
