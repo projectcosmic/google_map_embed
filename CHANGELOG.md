@@ -6,8 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.2.2] - 2020-03-23
 ### Fixed
+- Fix address field component order
 - Fix changelog format
+- Fix composer.json `require` key
 
 ## [1.2.1] - 2019-01-22
 ### Fixed
@@ -49,7 +53,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Initial release
 
-[Unreleased]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/HEAD..1.2.1
+[Unreleased]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/HEAD..1.2.2
+[1.2.2]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/1.2.2..1.2.1
 [1.2.1]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/1.2.1..1.2.0
 [1.2.0]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/1.2.0..1.1.5
 [1.1.5]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/1.1.5..1.1.4
