@@ -10,7 +10,7 @@
       "homepage": "https://cosmic.org.uk"
     }
   ],
-  "requires": {
+  "require": {
     "drupal/core": "~8.0"
   }
 }

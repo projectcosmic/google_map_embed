@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Fixed
 - Fix changelog format
+- Fix `composer.json` `require` key
 
 ## [2.0.3] - 2018-11-12
 ### Fixed
