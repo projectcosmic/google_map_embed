@@ -29,6 +29,7 @@ function google_map_embed_block_configure($delta = '') {
     '#title' => t('Place Query'),
     '#description' => t('The place query that specifies the location of the pin.'),
     '#default_value' => $settings['place'],
+    '#maxlength' => 256,
   );
 
   $form['classes'] = array(
