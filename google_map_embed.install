@@ -32,3 +32,26 @@ function google_map_embed_update_8101() {
     }
   }
 }
+
+/**
+ * Replace google_map_embed_address formatter with google_map_embed.
+ */
+function google_map_embed_update_8102() {
+  $displays = EntityViewDisplay::loadMultiple();
+
+  foreach ($displays as $display) {
+    /** @var \Drupal\Core\Entity\Entity\EntityViewDisplay $display */
+    $fields_settings = $display->get('content');
+    $changed = FALSE;
+    foreach ($fields_settings as $field_name => $settings) {
+      if (!empty($settings['type']) && $settings['type'] == 'google_map_embed_address') {
+        $fields_settings[$field_name]['type'] = 'google_map_embed';
+        $changed = TRUE;
+      }
+    }
+
+    if ($changed) {
+      $display->set('content', $fields_settings)->save();
+    }
+  }
+}
