@@ -29,7 +29,7 @@ function google_map_embed_theme() {
  *   - attributes: The HTML attributes to apply to the iframe element.
  *   - place: place query string.
  */
-function template_preprocess_google_map_embed(&$variables) {
+function template_preprocess_google_map_embed(array &$variables) {
   $api_key = \Drupal::service('settings')->get('google_map_embed_api_key');
 
   $variables['attributes']['frameborder'] = 0;
