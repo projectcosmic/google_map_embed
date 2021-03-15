@@ -31,13 +31,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Set address component value order
 
-## [2.0.0] - 2018-11-07
+## 2.0.0 - 2018-11-07
 ### Added
 - Initial Drupal 8 release
 
-[Unreleased]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/HEAD..2.0.4
-[2.0.4]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.4..2.0.3
-[2.0.3]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.3..2.0.2
-[2.0.2]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.2..2.0.1
-[2.0.1]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.1..2.0.1
-[2.0.1]: https://bitbucket.org/projectcosmic/google_map_embed/branches/compare/2.0.1..2.0.0
+[Unreleased]: https://github.com/projectcosmic/google_map_embed/compare/v2.0.4...2.x
+[2.0.4]: https://github.com/projectcosmic/google_map_embed/compare/2.0.3...v2.0.4
+[2.0.3]: https://github.com/projectcosmic/google_map_embed/compare/2.0.2...2.0.3
+[2.0.2]: https://github.com/projectcosmic/google_map_embed/compare/2.0.1...2.0.2
+[2.0.1]: https://github.com/projectcosmic/google_map_embed/compare/2.0.0...2.0.1
