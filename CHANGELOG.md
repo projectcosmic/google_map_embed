@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0] - 2021-03-15
+### Changed
+- Replace address formatter with generic version
+
+### Fixed
+- Fix missing type hint
+
 ## [2.0.4] - 2020-04-02
 ### Added
 - Add `core_version_requirement`
@@ -35,7 +42,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Initial Drupal 8 release
 
-[Unreleased]: https://github.com/projectcosmic/google_map_embed/compare/v2.0.4...2.x
+[Unreleased]: https://github.com/projectcosmic/google_map_embed/compare/v2.1.0...2.x
+[2.1.0]: https://github.com/projectcosmic/google_map_embed/compare/v2.0.4...v2.1.0
 [2.0.4]: https://github.com/projectcosmic/google_map_embed/compare/2.0.3...v2.0.4
 [2.0.3]: https://github.com/projectcosmic/google_map_embed/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/projectcosmic/google_map_embed/compare/2.0.1...2.0.2
