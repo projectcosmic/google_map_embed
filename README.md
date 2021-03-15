@@ -8,6 +8,7 @@ This API has unlimited free usage limit but has fewer capabilities than the
 ## Supported Field Types
 
 - [`address`](https://drupal.org/project/address)
+- `string` (as raw place query string)
 
 ## Initial Setup
 
