@@ -9,11 +9,10 @@ namespace Drupal\google_map_embed\Plugin\Field\FieldFormatter;
  *
  * @FieldFormatter(
  *   id = "google_map_embed_address",
- *   label = @Translation("Google Map (Embed API)"),
+ *   label = @Translation("[DEPRECATED] Google Map (Embed API)"),
  *   field_types = {
  *     "address"
  *   },
- *   no_ui = TRUE,
  * )
  */
 class GoogleMapEmbedAddressFormatter extends GoogleMapEmbedFormatter {}
