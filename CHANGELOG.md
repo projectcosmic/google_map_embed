@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Rework deprecation
 
+### Fixed
+- Fix address field type formatter implementation
+
 ## [2.1.0] - 2021-03-15
 ### Changed
 - Replace address formatter with generic version

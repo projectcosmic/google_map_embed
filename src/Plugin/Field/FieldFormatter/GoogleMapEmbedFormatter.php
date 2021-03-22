@@ -95,29 +95,24 @@ class GoogleMapEmbedFormatter extends FormatterBase {
 
       switch ($items->getFieldDefinition()->getType()) {
         case 'address':
-          $country_code = $item->getCountryCode();
-          $address_format = $this->addressFormatRepository->get($country_code);
-          $values = $this->getValues($item, $address_format);
-
           $address_components = [];
-          $component_order = array_intersect([
-            'givenName',
-            'additionalName',
-            'familyName',
+          $component_order = [
+            'given_name',
+            'additional_name',
+            'family_name',
             'organization',
-            'addressLine1',
-            'addressLine2',
-            'dependentLocality',
+            'address_line1',
+            'address_line2',
+            'dependent_locality',
             'locality',
-            'administrativeArea',
-            'country',
-            'sortingCode',
-            'postalCode',
-          ], $address_format->getUsedFields());
-
+            'administrative_area',
+            'sorting_code',
+            'postal_code',
+            'country_code',
+          ];
           foreach ($component_order as $field) {
-            if ($values[$field]) {
-              $address_components[] = urlencode($values[$field]);
+            if (!empty($item->$field)) {
+              $address_components[] = $item->$field;
             }
           }
           $place = implode(',', $address_components);
